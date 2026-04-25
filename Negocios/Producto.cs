@@ -45,4 +45,6 @@ public class Producto
         return $"{codigo} | {nombre} | {precio} Bs | Stock: {stock}";
     }
     
+    public Subcategoria GetSubcategoria(){ return subcategoria; }
+    
 }
