@@ -37,9 +37,13 @@ public class PresentacionTienda
             {
                 MenuAdmin();
             }
-            else
+            else if (ingresando.GetRol().GetNombre() == "Cliente")
             {
                 MenuCliente(ingresando);
+            }
+            else
+            {
+                MenuClienteVip(ingresando);
             }
         }
     }
@@ -58,8 +62,10 @@ public class PresentacionTienda
             Console.WriteLine("6. Agregar usuario");
             Console.WriteLine("7. Actualizar usuario");
             Console.WriteLine("8. Eliminar usuario");
-            Console.WriteLine("9. Cerrar sesion");
-            Console.WriteLine("10. Cerrar tienda");
+            Console.WriteLine("9. Agregar Descuento");
+            Console.WriteLine("10. Actualizar Descuento");
+            Console.WriteLine("11. Cerrar sesion");
+            Console.WriteLine("12. Cerrar tienda");
             Console.Write("Opcion: ");
 
             int opcion = int.Parse(Console.ReadLine());
@@ -104,8 +110,10 @@ public class PresentacionTienda
                     Console.WriteLine("Usuario actualizado");
                     break;
                 case 8: EliminarUsuario(); break;
-                case 9: continuar = false; break;
-                case 10: Environment.Exit(0); break;
+                case 9: break;
+                case 10: break;
+                case 11: continuar = false; break;
+                case 12: Environment.Exit(0); break;
                 default: Console.WriteLine("Opcion invalida"); break;
             }
         }
@@ -117,6 +125,31 @@ public class PresentacionTienda
         while (continuar)
         {
             Console.WriteLine("\nCliente...");
+            Console.WriteLine("1. Ver productos disponibles");
+            Console.WriteLine("2. Realizar una compra");
+            Console.WriteLine("3. Cerrar sesion");
+            Console.WriteLine("4. Cerrar tienda");
+            Console.Write("Opcion: ");
+
+            int opcion = int.Parse(Console.ReadLine());
+
+            switch (opcion)
+            {
+                case 1: mostrarTienda.MostrarCatalogo(); break;
+                case 2: MenuCompra(usuario); break;
+                case 3: continuar = false; break;
+                case 4: Environment.Exit(0); break;
+                default: Console.WriteLine("Opcion invalida"); break;
+            }
+        }
+    }
+    
+    public void MenuClienteVip(Usuario usuario)
+    {
+        bool continuar = true;
+        while (continuar)
+        {
+            Console.WriteLine("\nClienteVip...");
             Console.WriteLine("1. Ver productos disponibles");
             Console.WriteLine("2. Realizar una compra");
             Console.WriteLine("3. Cerrar sesion");
@@ -176,7 +209,7 @@ public class PresentacionTienda
                         Console.WriteLine("Producto no encontrado");
                     break;
                 case 2:
-                    mostrarTienda.MostrarCarrito();
+                    mostrarTienda.MostrarCarritoVip();
                     break;
                 case 3:
                     Console.WriteLine("Metodo de pago: 1. Efectivo  2. Tarjeta");
@@ -185,7 +218,7 @@ public class PresentacionTienda
                     compra.ConfirmarCompra();
                     compra.RegistrarPago(pago);
                     carrito.VaciarCarrito();
-                    Console.WriteLine($"Compra confirmada. Total: {compra.GetTotal()} Bs");
+                    Console.WriteLine($"Compra confirmada. Total: {compra.CalcularTotalDescuento()} Bs");
                     comprando = false;
                     break;
                 case 4:

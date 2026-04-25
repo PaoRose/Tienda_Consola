@@ -46,5 +46,10 @@ public class Producto
     }
     
     public Subcategoria GetSubcategoria(){ return subcategoria; }
+
+    public void AgregarDescuento()
+    {
+        
+    }
     
 }

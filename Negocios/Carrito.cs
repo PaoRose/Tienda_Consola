@@ -24,6 +24,12 @@ public class Carrito
         return total;
     }
 
+    public double CalcularTotalDescuento()
+    {
+        double descuento;
+            descuento = CalcularTotal()/10;
+        return descuento;
+    }
     public void VaciarCarrito()
     {
         items.Clear();

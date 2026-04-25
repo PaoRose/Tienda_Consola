@@ -23,7 +23,13 @@ public class Compra
         t += item.CalcularSubtotal();
         return t;
     }
-
+    public double CalcularTotalDescuento()
+    {
+        double t = 0;
+        foreach (DetalleCompra item in items)
+            t += item.CalcularSubtotal()%10;
+        return t;
+    }
     public void RegistrarPago(MetodoPago metodo)
     {
         this.metodoPago = metodo;
@@ -44,4 +50,5 @@ public class Compra
     
     public string GetCodigo() { return codigo; }
     public double GetTotal() { return total; }
+    public double GetTotalDescuento() { return total; }
 }

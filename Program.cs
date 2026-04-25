@@ -6,6 +6,7 @@ Privilegio pGestionarProductos = new Privilegio("gestionar_productos", "Gestiona
 Privilegio pGestionarUsuarios  = new Privilegio("gestionar_usuarios", "Gestionar usuarios");
 Privilegio pVerCatalogo        = new Privilegio("ver_catalogo", "Ver productos");
 Privilegio pRealizarCompra     = new Privilegio("realizar_compra", "Comprar productos");
+Privilegio pDescuentoFidelidad = new Privilegio("descuento-fidelidad", "Descuento por ser cliente vip");
 
 // 2. roles
 Rol rolAdmin = new Rol("Administrador");
@@ -18,10 +19,16 @@ Rol rolCliente = new Rol("Cliente");
 rolCliente.AgregarPrivilegio(pVerCatalogo);
 rolCliente.AgregarPrivilegio(pRealizarCompra);
 
+Rol rolClienteVip = new Rol("ClienteVip");
+rolClienteVip.AgregarPrivilegio(pVerCatalogo);
+rolClienteVip.AgregarPrivilegio(pRealizarCompra);
+rolClienteVip.AgregarPrivilegio(pDescuentoFidelidad);
+
 // 3. autenticacion y usuarios
 Autenticacion auth = new Autenticacion();
 auth.AgregarUsuario(new Usuario("admin", "1234", rolAdmin));
 auth.AgregarUsuario(new Usuario("juan", "5678", rolCliente));
+auth.AgregarUsuario(new Usuario("pepa", "2468", rolClienteVip));
 
 // 4. inventarios y prodiuctos
 Subcategoria subLaptops    = new Subcategoria("SUB001", "Laptops", "Computadoras portatiles");

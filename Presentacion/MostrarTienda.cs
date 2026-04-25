@@ -30,8 +30,9 @@ public class MostrarTienda
         Console.WriteLine($"Total: {carrito.CalcularTotal()} Bs" );
     }    
     
-    public void MostrarDetalle()
+    public void MostrarCarritoVip()
     {
+        Console.WriteLine($"Total: {carrito.CalcularTotalDescuento()} Bs" );
     }
 
 }
