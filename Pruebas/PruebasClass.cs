@@ -98,6 +98,63 @@ public class PruebasClass
     ////////////////////////////////////////////////////////////////////////////////////////////
 
     /*
-     
+     using Tienda_Consola.Negocios;
+
+     // 1. inventario y productitos
+     Inventario inventario = new Inventario();
+
+     Subcategoria subLaptops = new Subcategoria("SUB001", "Laptops", "Computadoras portatiles");
+     Producto laptop = new Producto("C001", "Laptop HP", 4500, "Laptop 15 pulgadas", 10, true, subLaptops);
+     Producto mouse  = new Producto("C002", "Mouse Logitech", 120, "Mouse inalambrico", 50, true, subLaptops);
+
+     inventario.AgregarProducto(laptop);
+     inventario.AgregarProducto(mouse);
+
+     foreach (Producto p in inventario.ListarProductos())
+         Console.WriteLine(p.ToString());
+     // C001 | Laptop HP | Bs 4500 | Stock: 10
+     // C002 | Mouse Logitech | Bs 120 | Stock: 50
+
+     // 2. detalle compra
+     DetalleCompra detalle1 = new DetalleCompra(laptop, 2);
+     DetalleCompra detalle2 = new DetalleCompra(mouse, 3);
+
+     Console.WriteLine(detalle1.CalcularSubtotal()); // 9000
+     Console.WriteLine(detalle2.CalcularSubtotal()); // 360
+     Console.WriteLine(" DetalleCompra");
+
+     // 3. carrito
+     Carrito carrito = new Carrito();
+     carrito.AgregarProducto(detalle1);
+     carrito.AgregarProducto(detalle2);
+
+     Console.WriteLine(carrito.CalcularTotal()); // 9360
+
+     carrito.EliminarProducto("C002");
+     Console.WriteLine(carrito.CalcularTotal()); // 9000 — sin el mouse
+
+     carrito.AgregarProducto(detalle2);
+     Console.WriteLine(carrito.CalcularTotal()); // 9360 — con mouse de vuelta
+     Console.WriteLine("Carrito OK");
+
+     // 4. compra
+     Usuario cliente = new Usuario("juan", "5678", new Rol("Cliente"));
+     Compra compra = new Compra(cliente);
+
+     compra.AgregarItem(detalle1);
+     compra.AgregarItem(detalle2);
+
+     Console.WriteLine($"Stock laptop antes: {laptop.GetStock()}"); // 10
+
+     compra.ConfirmarCompra();
+
+     Console.WriteLine($"Stock laptop despues: {laptop.GetStock()}"); // 8 — redujo 2
+     Console.WriteLine($"Total compra: {compra.GetTotal()}");        // 9360
+
+     // 5. metodo pago
+     MetodoPago pago = new MetodoPago("Efectivo");
+     compra.RegistrarPago(pago);
+     Console.WriteLine(pago.GetEstado()); // Aprobado
+     Console.WriteLine(" MetodoPago OK");
      */
 }
