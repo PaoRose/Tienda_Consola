@@ -68,11 +68,41 @@ public class PresentacionTienda
             {
                 case 1: mostrarTienda.MostrarInventario(); break;
                 case 2: AgregarProducto(); break;
-                case 3: break; // implementar después
+                case 3:     
+                    Console.Write("Codigo del producto a actualizar: ");
+                    string codAct = Console.ReadLine();
+                    Producto pAct = inventario.BuscarProducto(codAct);
+                    if (pAct != null)
+                    {
+                        Console.Write("Nuevo nombre: "); 
+                        string nuevoNombre = Console.ReadLine();
+                        Console.Write("Nuevo precio: "); 
+                        double nuevoPrecio = double.Parse(Console.ReadLine());
+                        Console.Write("Nuevo stock: "); 
+                        int nuevoStock = int.Parse(Console.ReadLine());
+                        Console.Write("Nueva descripcion: "); 
+                        string nuevaDesc = Console.ReadLine();
+                        Producto actualizado = new Producto(codAct, nuevoNombre, nuevoPrecio, nuevaDesc, nuevoStock, true, pAct.GetSubcategoria());
+                        inventario.ActualizarProducto(actualizado);
+                        Console.WriteLine("Producto actualizado");
+                    }
+                    else
+                        Console.WriteLine("Producto no encontrado");
+                    break;
                 case 4: EliminarProducto(); break;
                 case 5: ListarUsuarios(); break;
                 case 6: AgregarUsuario(); break;
-                case 7: break; // implementar después
+                case 7:
+                    Console.Write("Username a actualizar: "); 
+                    string userAct = Console.ReadLine();
+                    Console.Write("Nueva password: "); 
+                    string passAct = Console.ReadLine();
+                    Console.Write("Rol (1.Admin / 2.Cliente): ");
+                    string rolAct = Console.ReadLine() == "1" ? "Administrador" : "Cliente";
+                    Rol nuevoRol = new Rol(rolAct);
+                    autenticacion.ActualizarUsuario(new Usuario(userAct, passAct, nuevoRol));
+                    Console.WriteLine("Usuario actualizado");
+                    break;
                 case 8: EliminarUsuario(); break;
                 case 9: continuar = false; break;
                 case 10: Environment.Exit(0); break;
@@ -198,13 +228,13 @@ public class PresentacionTienda
         Console.Write("Rol (1.Admin / 2.Cliente): ");
         string rolNombre = Console.ReadLine() == "1" ? "Administrador" : "Cliente";
         Rol rol = new Rol(rolNombre);
-        autenticacion.AgregarUsuario(new Usuario(user, pass, rol));
+        autenticacion.AgregarUsuario(new Usuario(usuario, pass, rol));
         Console.WriteLine("Usuario agregado");
     }
     private void EliminarUsuario()
     {
         Console.Write("Usuario a eliminar: ");
-        string user = Console.ReadLine();
+        string usuario = Console.ReadLine();
         autenticacion.EliminarUsuario(usuario);
         Console.WriteLine("Usuario eliminado");
     }
