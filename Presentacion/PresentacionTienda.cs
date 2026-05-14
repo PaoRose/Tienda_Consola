@@ -27,7 +27,7 @@ public class PresentacionTienda
             Console.Write("Password: ");
             string password = Console.ReadLine();
 
-            Usuario? ingresando = autenticacion.Login(usuario, password);
+            Cliente? ingresando = autenticacion.Login(usuario, password);
 
             if (ingresando == null)
             {
@@ -106,7 +106,7 @@ public class PresentacionTienda
                     Console.Write("Rol (1.Admin / 2.Cliente): ");
                     string rolAct = Console.ReadLine() == "1" ? "Administrador" : "Cliente";
                     Rol nuevoRol = new Rol(rolAct);
-                    autenticacion.ActualizarUsuario(new Usuario(userAct, passAct, nuevoRol));
+                    autenticacion.ActualizarUsuario(new Cliente(userAct, passAct, nuevoRol));
                     Console.WriteLine("Usuario actualizado");
                     break;
                 case 8: EliminarUsuario(); break;
@@ -119,7 +119,7 @@ public class PresentacionTienda
         }
     }
 
-    public void MenuCliente(Usuario usuario)
+    public void MenuCliente(Cliente cliente)
     {
         bool continuar = true;
         while (continuar)
@@ -136,7 +136,7 @@ public class PresentacionTienda
             switch (opcion)
             {
                 case 1: mostrarTienda.MostrarCatalogo(); break;
-                case 2: MenuCompra(usuario); break;
+                case 2: MenuCompra(cliente); break;
                 case 3: continuar = false; break;
                 case 4: Environment.Exit(0); break;
                 default: Console.WriteLine("Opcion invalida"); break;
@@ -144,7 +144,7 @@ public class PresentacionTienda
         }
     }
     
-    public void MenuClienteVip(Usuario usuario)
+    public void MenuClienteVip(Cliente cliente)
     {
         bool continuar = true;
         while (continuar)
@@ -161,7 +161,7 @@ public class PresentacionTienda
             switch (opcion)
             {
                 case 1: mostrarTienda.MostrarCatalogo(); break;
-                case 2: MenuCompra(usuario); break;
+                case 2: MenuCompra(cliente); break;
                 case 3: continuar = false; break;
                 case 4: Environment.Exit(0); break;
                 default: Console.WriteLine("Opcion invalida"); break;
@@ -169,9 +169,9 @@ public class PresentacionTienda
         }
     }
 
-    public void MenuCompra(Usuario usuario)
+    public void MenuCompra(Cliente cliente)
     {
-        Compra compra = new Compra(usuario);
+        Compra compra = new Compra(cliente);
         bool comprando = true;
 
         while (comprando)
@@ -250,7 +250,7 @@ public class PresentacionTienda
 
     private void ListarUsuarios()
     {
-        foreach (Usuario u in autenticacion.ListarUsuario())
+        foreach (Cliente u in autenticacion.ListarUsuario())
             Console.WriteLine($"{u.GetUsuario()} | {u.GetRol().GetNombre()}");
     }
 
@@ -261,7 +261,7 @@ public class PresentacionTienda
         Console.Write("Rol (1.Admin / 2.Cliente): ");
         string rolNombre = Console.ReadLine() == "1" ? "Administrador" : "Cliente";
         Rol rol = new Rol(rolNombre);
-        autenticacion.AgregarUsuario(new Usuario(usuario, pass, rol));
+        autenticacion.AgregarUsuario(new Cliente(usuario, pass, rol));
         Console.WriteLine("Usuario agregado");
     }
     private void EliminarUsuario()

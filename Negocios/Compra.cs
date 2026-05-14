@@ -6,7 +6,7 @@ public class Compra
     private DateTime fecha;
     private double total;
     private List<DetalleCompra> items = new List<DetalleCompra>();
-    private Usuario usuario; 
+    private Cliente _cliente; 
     private MetodoPago metodoPago;
 
     public void ConfirmarCompra()
@@ -36,9 +36,9 @@ public class Compra
         metodo.ProcesarPago(total);
     }
 
-    public Compra(Usuario usuario)
+    public Compra(Cliente cliente)
     {
-        this.usuario = usuario;
+        this._cliente = cliente;
         this.fecha = DateTime.Now;
         this.codigo = "C" + DateTime.Now.Ticks;
     }

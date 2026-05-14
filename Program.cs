@@ -13,7 +13,6 @@ Rol rolAdmin = new Rol("Administrador");
 rolAdmin.AgregarPrivilegio(pGestionarProductos);
 rolAdmin.AgregarPrivilegio(pGestionarUsuarios);
 rolAdmin.AgregarPrivilegio(pVerCatalogo);
-rolAdmin.AgregarPrivilegio(pRealizarCompra);
 
 Rol rolCliente = new Rol("Cliente");
 rolCliente.AgregarPrivilegio(pVerCatalogo);
@@ -26,9 +25,9 @@ rolClienteVip.AgregarPrivilegio(pDescuentoFidelidad);
 
 // 3. autenticacion y usuarios
 Autenticacion auth = new Autenticacion();
-auth.AgregarUsuario(new Usuario("admin", "1234", rolAdmin));
-auth.AgregarUsuario(new Usuario("juan", "5678", rolCliente));
-auth.AgregarUsuario(new Usuario("pepa", "2468", rolClienteVip));
+auth.AgregarUsuario(new Cliente("admin", "1234", rolAdmin));
+auth.AgregarUsuario(new Cliente("juan", "5678", rolCliente));
+auth.AgregarUsuario(new Cliente("pepa", "2468", rolClienteVip));
 
 // 4. inventarios y prodiuctos
 Subcategoria subLaptops    = new Subcategoria("SUB001", "Laptops", "Computadoras portatiles");

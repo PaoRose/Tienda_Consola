@@ -1,12 +1,12 @@
 ﻿namespace Tienda_Consola.Negocios;
 
-public class Usuario
+public class Cliente
 {
     private string usuario;
     private string password;
     private Rol rol;
 
-    public Usuario(string usuario, string password, Rol rol)
+    public Cliente(string usuario, string password, Rol rol)
     {
         this.usuario = usuario;
         this.password = password;
