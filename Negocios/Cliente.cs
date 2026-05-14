@@ -1,20 +1,24 @@
 ﻿namespace Tienda_Consola.Negocios;
 
-public class Cliente
+public abstract class Cliente
 {
+    private string nombre;
     private string usuario;
     private string password;
-    private Rol rol;
-
-    public Cliente(string usuario, string password, Rol rol)
+    private Carrito carrito;
+    public Cliente(string nombre, string usuario, string password)
     {
+        this.nombre = nombre;
         this.usuario = usuario;
         this.password = password;
-        this.rol = rol;
+        this.carrito = new Carrito();
     }
-
+    
+    public string Nombre {return nombre; }
     public string GetUsuario() { return usuario; }
     public string GetPassword() { return password; }
-    public Rol GetRol() { return rol; }
+    public Carrito GetCarrito() {return carrito; }
 
+    public abstract double CalcularDescuento(double sub);
+    public abstract string GetTipo();
 }
