@@ -24,14 +24,28 @@ public class Carrito
         return total;
     }
 
-    public double CalcularTotalDescuento()
+    public void MostrarCarrito()
     {
-        double descuento;
-            descuento = CalcularTotal()/10;
-        return descuento;
+        if (items.Count == 0)
+        {
+            Console.WriteLine("El carrito esta vacio.");
+            return;
+        }
+
+        foreach (DetalleCompra item in items)
+            item.MostrarDetalle();
     }
-    public void VaciarCarrito()
+    
+    public void VaciarCarrito() { items.Clear(); }
+    public List<DetalleCompra> GetItems() { return items; }
+    public bool EstaVacio () { return items.Count == 0; }
+    
+    //Corrito->Compra
+    public Compra GenerarCompra()
     {
-        items.Clear();
+        Compra compra = new Compra();
+        foreach ( DetalleCompra item in items)
+            compra.AgregarItem(item);
+        return compra;
     }
 }
