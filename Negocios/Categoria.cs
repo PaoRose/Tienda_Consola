@@ -15,4 +15,5 @@ public class Categoria
     
     public string GetCodigo() { return codigo; }
     public string GetNombre() { return nombre; }
+    public string GetDescripcion() { return descripcion; }
 }

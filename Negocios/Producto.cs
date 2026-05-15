@@ -1,55 +1,45 @@
 ﻿namespace Tienda_Consola.Negocios;
 
-public class Producto
+public class Inventario
 {
-    public string codigo;
-    public string nombre;
-    private double precio;
-    public string descripcion;
-    private int stock;
-    public bool habilitado;
-    private Subcategoria subcategoria;
+    private List<Producto> productos = new List<Producto>();
 
-    public Producto(string codigo, string nombre, double precio, string descripcion, int stock,  bool habilitado, Subcategoria subcategoria)
+    public void AgregarProducto(Producto p) { productos.Add(p); }
+
+    public void ActualizarProducto(Producto p)
     {
-        this.codigo = codigo;
-        this.nombre = nombre;
-        this.precio = precio;
-        this.descripcion = descripcion;
-        this.stock = stock;
-        this.habilitado = habilitado;
-        this.subcategoria = subcategoria;
+        Producto? encontrado = productos.Find(x => x.GetCodigo() == p.GetCodigo());
+        if (encontrado != null)
+        {
+            productos.Remove(encontrado);
+            productos.Add(p);
+        }
     }
 
-    public string GetCodigo() { return codigo; }
-    public string GetNombre() { return nombre; }
-    public double GetPrecio() { return precio; }
-    public int GetStock() { return stock; }
-    public Subcategoria GetSubCategoria() { return subcategoria; }
-
-    public void ReducirStock(int cantidad)
+    public void EliminarProducto(string codigo)
     {
-        if (cantidad<= stock)
-            stock -=cantidad;
-        else 
-            habilitado = false;
+        Producto? encontrado = productos.Find(p => p.GetCodigo() == codigo);
+        if (encontrado != null)
+            productos.Remove(encontrado);
     }
 
-    public bool EstaHabilitado()
+    public List<Producto> ListarProductos() { return productos; }
+
+    public Producto? BuscarProducto(string codigo)
     {
-        return habilitado && stock > 0;
+        return productos.Find(p => p.GetCodigo() == codigo);
     }
 
-    public override string ToString()
+    public void MostrarInventario()
     {
-        return $"{codigo} | {nombre} | {precio} Bs | Stock: {stock}";
+        if (productos.Count == 0)
+        {
+            Console.WriteLine("  No hay productos en el inventario.");
+            return;
+        }
+        Console.WriteLine($"\n  {"Codigo",-8} {"Nombre",-25} {"Precio",10} {"Stock",8}");
+        Console.WriteLine("  " + new string('-', 55));
+        foreach (Producto p in productos)
+            Console.WriteLine("  " + p.ToString());
     }
-    
-    public Subcategoria GetSubcategoria(){ return subcategoria; }
-
-    public void AgregarDescuento()
-    {
-        
-    }
-    
 }

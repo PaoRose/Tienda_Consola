@@ -2,11 +2,13 @@
 
 public class Subcategoria
 {
-    public string codigo;
-    public string nombre;
-    public string descripcion;
+    private string codigo;
+    private string nombre;
+    private string descripcion;
+    private Categoria categoria;
+    
 
-    public Subcategoria(string codigo, string nombre, string descripcion)
+    public Subcategoria(string codigo, string nombre, string descripcion, Categoria categoria)
     {
         this.codigo = codigo;
         this.nombre = nombre;
