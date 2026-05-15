@@ -1,22 +1,26 @@
 ﻿namespace Tienda_Consola.Negocios;
 
-public class Subcategoria
+public class MetodoPago
 {
-    private string   codigo;
-    private string   nombre;
-    private string   descripcion;
-    private Categoria categoria;
+    private string tipo;
+    private string estado;
 
-    public Subcategoria(string codigo, string nombre, string descripcion, Categoria categoria)
+    public MetodoPago(string tipo, string estado)
     {
-        this.codigo      = codigo;
-        this.nombre      = nombre;
-        this.descripcion = descripcion;
-        this.categoria   = categoria;
+        this.tipo = tipo;
+        this.estado = "Pendiente";
+    }
+    public bool procesar MetodoPago()
+    {
+        estado = "Aceptado";
+        return true;
     }
 
-    public string    GetCodigo()      { return codigo; }
-    public string    GetNombre()      { return nombre; }
-    public string    GetDescripcion() { return descripcion; }
-    public Categoria GetCategoria()   { return categoria; }
+    public void MostrarMetodoPago()
+    {
+        Console.WriteLine($"MetodoPago : {tipo}");
+        Console.WriteLine($"Estado : {estado}");
+    }
+    public string GetTipo() { return tipo; }
+    public string GetEstado() { return estado; }
 }

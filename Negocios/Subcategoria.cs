@@ -13,6 +13,7 @@ public class Subcategoria
         this.codigo = codigo;
         this.nombre = nombre;
         this.descripcion = descripcion;
+        this.categoria = categoria;
     }
     
     public string GetCodigo() { return codigo; }
