@@ -8,12 +8,12 @@ public class Administrador
 
     public Administrador(string nombre, string usuario, string password)
     {
-        this.nombre = nombre;
-        this.nombre = usuario;
+        this.nombre   = nombre;   // fix: antes decía this.nombre = usuario
+        this.usuario  = usuario;
         this.password = password;
     }
-    
-    public string GetNombre() { return nombre; }
-    public string GetUsuario() { return usuario; }
+
+    public string GetNombre()   { return nombre; }
+    public string GetUsuario()  { return usuario; }
     public string GetPassword() { return password; }
 }

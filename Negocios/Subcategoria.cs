@@ -1,5 +1,5 @@
 ﻿namespace Tienda_Consola.Negocios;
-
+//Composicion: Categoria compone subcategoria 
 public class Subcategoria
 {
     private string codigo;

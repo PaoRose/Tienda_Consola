@@ -1,45 +1,56 @@
 ﻿namespace Tienda_Consola.Negocios;
 
-public class Inventario
+public class Producto
 {
-    private List<Producto> productos = new List<Producto>();
+    private string       codigo;
+    private string       nombre;
+    private double       precio;
+    private string       descripcion;
+    private int          stock;
+    private bool         habilitado;
+    private Subcategoria subcategoria;
 
-    public void AgregarProducto(Producto p) { productos.Add(p); }
-
-    public void ActualizarProducto(Producto p)
+    public Producto(string codigo, string nombre, double precio,
+        string descripcion, int stock, bool habilitado,
+        Subcategoria subcategoria)
     {
-        Producto? encontrado = productos.Find(x => x.GetCodigo() == p.GetCodigo());
-        if (encontrado != null)
-        {
-            productos.Remove(encontrado);
-            productos.Add(p);
-        }
+        this.codigo       = codigo;
+        this.nombre       = nombre;
+        this.precio       = precio;
+        this.descripcion  = descripcion;
+        this.stock        = stock;
+        this.habilitado   = habilitado;
+        this.subcategoria = subcategoria;
     }
 
-    public void EliminarProducto(string codigo)
+    public string       GetCodigo()        { return codigo; }
+    public string       GetNombre()        { return nombre; }
+    public double       GetPrecio()        { return precio; }
+    public string       GetDescripcion()   { return descripcion; }
+    public int          GetStock()         { return stock; }
+    public Subcategoria GetSubcategoria()  { return subcategoria; }
+
+    public void SetNombre(string nombre)       { this.nombre = nombre; }
+    public void SetPrecio(double precio)       { this.precio = precio; }
+    public void SetDescripcion(string desc)    { this.descripcion = desc; }
+    public void SetStock(int stock)            { this.stock = stock; }
+    public void SetHabilitado(bool habilitado) { this.habilitado = habilitado; }
+
+    public void ReducirStock(int cantidad)
     {
-        Producto? encontrado = productos.Find(p => p.GetCodigo() == codigo);
-        if (encontrado != null)
-            productos.Remove(encontrado);
+        if (cantidad <= stock)
+            stock -= cantidad;
+        else
+            habilitado = false;
     }
 
-    public List<Producto> ListarProductos() { return productos; }
-
-    public Producto? BuscarProducto(string codigo)
+    public bool EstaDisponible()
     {
-        return productos.Find(p => p.GetCodigo() == codigo);
+        return habilitado && stock > 0;
     }
 
-    public void MostrarInventario()
+    public override string ToString()
     {
-        if (productos.Count == 0)
-        {
-            Console.WriteLine("  No hay productos en el inventario.");
-            return;
-        }
-        Console.WriteLine($"\n  {"Codigo",-8} {"Nombre",-25} {"Precio",10} {"Stock",8}");
-        Console.WriteLine("  " + new string('-', 55));
-        foreach (Producto p in productos)
-            Console.WriteLine("  " + p.ToString());
+        return $"{codigo,-8} | {nombre,-25} | {precio,8:F2} Bs | Stock: {stock}";
     }
 }

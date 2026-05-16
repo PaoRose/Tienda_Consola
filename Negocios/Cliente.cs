@@ -6,18 +6,19 @@ public abstract class Cliente
     private string usuario;
     private string password;
     private Carrito carrito;
+
     public Cliente(string nombre, string usuario, string password)
     {
-        this.nombre = nombre;
-        this.usuario = usuario;
+        this.nombre   = nombre;
+        this.usuario  = usuario;
         this.password = password;
-        this.carrito = new Carrito();
+        this.carrito  = new Carrito();
     }
-    
-    public string Nombre {return nombre; }
-    public string GetUsuario() { return usuario; }
-    public string GetPassword() { return password; }
-    public Carrito GetCarrito() {return carrito; }
+
+    public string  GetNombre()   { return nombre; }   // fix: faltaban ()
+    public string  GetUsuario()  { return usuario; }
+    public string  GetPassword() { return password; }
+    public Carrito GetCarrito()  { return carrito; }
 
     public abstract double CalcularDescuento(double sub);
     public abstract string GetTipo();
