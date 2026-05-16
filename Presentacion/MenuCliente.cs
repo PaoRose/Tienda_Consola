@@ -1,5 +1,5 @@
 ﻿using Tienda_Consola.Negocios;
-
+using System;
 namespace Tienda_Consola.Presentacion;
 
 public class MenuCliente
@@ -19,14 +19,13 @@ public class MenuCliente
         while (!salir)
         {
             Console.WriteLine("Menu Cliente");
-            Console.WriteLine("${cliente.GetNombre()} | {cliente.GetTipo()}");
             
             Console.WriteLine("1. Ver catalogo");
             Console.WriteLine("2. Agregar producto al carrito");
             Console.WriteLine("3. Ver carrito");
-            Console.WriteLine("4. Ver resumen de descuento");
-            Console.WriteLine("5. Confirmar compra");
-            Console.WriteLine("0. Cerrar sesion (• ֊ •)੭");
+            //Console.WriteLine("4. Ver resumen de descuento");
+            Console.WriteLine("4. Confirmar compra");
+            Console.WriteLine("0. Cerrar sesion");
             
             Console.WriteLine("Opcion: ");
             string opcion = Console.ReadLine() ?? "";
@@ -36,8 +35,8 @@ public class MenuCliente
                 case "1": MostrarCatalogo();   break;
                 case "2": AgregarAlCarrito();  break;
                 case "3": VerCarrito();        break;
-                case "4": VerResumenDescuento();  break;
-                case "5": ConfirmarCompra();   break;
+                //case "4": VerResumenDescuento();  break;
+                case "4": ConfirmarCompra();   break;
                 case "0": salir = true;        break;
                 
                 default: Console.WriteLine("Opcion no valida"); break;
@@ -104,7 +103,7 @@ public class MenuCliente
 
     }
 
-    public void VerResumenDescuento()
+    /*public void VerResumenDescuento()
     {
         if (cliente.GetCarrito().EstaVacio())
         {
@@ -135,18 +134,22 @@ public class MenuCliente
         Console.WriteLine($"  Descuento adicional(5%) : {descuentoAdicional,10:F2} Bs");
         Console.WriteLine($"  {"",32}----------");
         Console.WriteLine($"  Total a pagar           : {total,10:F2} Bs");
-    }
+    }*/
 
     public void ConfirmarCompra()
     {
-
         if (cliente.GetCarrito().EstaVacio())
         {
             Console.WriteLine("  El carrito esta vacio.");
             return;
         }
-
-        VerResumenDescuento();
+        
+        Console.WriteLine("      Resumen de Compra       ");
+        Console.WriteLine("--------------------------------");
+        cliente.GetCarrito().MostrarCarrito();
+        if (!cliente.GetCarrito().EstaVacio())
+            Console.WriteLine($"   Subtotal: {cliente.GetCarrito().CalcularTotal():F2} Bs.");
+        Console.WriteLine("--------------------------------");
 
         Console.Write("\n¿Confirmar compra? (s/n): ");
         if ((Console.ReadLine() ?? "").ToLower() != "s")
@@ -176,6 +179,7 @@ public class MenuCliente
             compra.RegistrarPago(metodo);
              
             Console.WriteLine("\n  Compra realizada exitosamente.");
+            
             compra.MostrarDetalleSimple();
             cliente.GetCarrito().VaciarCarrito();
     }

@@ -1,5 +1,5 @@
 ﻿namespace Tienda_Consola.Negocios;
-
+using System;
 public class Compra
 {
     private string              codigo;
@@ -8,7 +8,7 @@ public class Compra
     private List<DetalleCompra> items = new List<DetalleCompra>();
     private MetodoPago?         metodoPago;
 
-    public Compra()   // fix: el UML no tiene Cliente como atributo de Compra
+    public Compra()
     {
         this.fecha  = DateTime.Now;
         this.codigo = "C" + DateTime.Now.Ticks;
@@ -31,10 +31,10 @@ public class Compra
         return t;
     }
 
-    public void RegistrarPago(MetodoPago metodo)
+    public bool RegistrarPago(MetodoPago metodo)
     {
         this.metodoPago = metodo;
-        metodo.ProcesarPago(total);
+        return metodo.ProcesarPago(total);
     }
 
     public void MostrarDetalleSimple()
